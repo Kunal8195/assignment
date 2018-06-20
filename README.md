@@ -1,4 +1,4 @@
-                                       API DOC
+                            # API DOC #
 # To Start the Project
 ```
    npm install
@@ -9,7 +9,7 @@ For all third party services such as Google, facebook, twilio, jwt and aws-ses w
 place that .env file in project's folder.
 
 Used JsonWebToken for the detection of login from the multiple devices.
-if found a valid Json web token in DB then it means a user has a valid session previously. so will create a new json web token and store in DB to make establish a new session.
+if found a valid Json web token in DB then it means a user has a valid session previously. so will create a new json web token and store in DB to establish a new session.
 
 This project have endpoints provided below. login and signup works good. when you enable double authentication then login will be done through recieving OTP at your mobile number or at your email. but in twilio trial account we cannot send OTP to unregistered mobile number. so you will be able to send OTP to only my number 9041306219. same with case of email. 
 
