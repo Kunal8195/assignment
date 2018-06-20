@@ -68,7 +68,7 @@ const logIn = function(payload, callback) {
                                if accessToken is found then we will verify it 
                                if not found then we will store a new one
                             */
-                            let token = jwt.sign({_id:found._id},process.env.jwtSecretKey,{expiresIn:'1h'})
+                            let token = jwt.sign({_id:found._id},process.env.jwtSecretKey || 'qwertyuiop12345678',{expiresIn:'1h'})
                             
                             if(found.accessToken){ 
                                 jwt.verify(found.accessToken, process.env.jwtSecretKey || 'qwertyuiop12345678', function(err, decoded){
