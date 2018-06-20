@@ -5,14 +5,14 @@
    npm start
 ```
 
+For all third party services such as Google, facebook, twilio  and aws-ses we need secret keys and id's which are stored in environment varaibles. so to get this environment file email at kpal9518@gmail.com.
+place that .env file in project's folder.
 
-This project have endpoint provided below. login and signup works good. when you enable double authentication then login will be done through recieving OTP at your mobile number or at your email. but in twilio trial account we cannot send OTP to unregistered mobile number. so you will be able to send OTP to only my number 9041306219. same with case of email. 
-
-For all third party services such as Google, facebook, twilio  and aws-ses we need secret keys and id's which are stored in environment varaibles. so to get this environment file email at kpal9518@gmail.com. place that .env file in project's folder.
+This project have endpoints provided below. login and signup works good. when you enable double authentication then login will be done through recieving OTP at your mobile number or at your email. but in twilio trial account we cannot send OTP to unregistered mobile number. so you will be able to send OTP to only my number 9041306219. same with case of email. 
 
 Root URL 
 Try this endpoint in your browser
-``` http://localhost:3000/ ```
+``` http://159.65.157.18:3000/ ```
 
 # Endpoints for Signup and Login
 1.
