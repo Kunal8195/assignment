@@ -52,20 +52,29 @@ passport.use(new FacebookStrategy({
         callbackURL: process.env.facebookCallbackURL,
         profileFields: ['id', 'displayName', 'birthday', 'email']
     },
-    function(accessToken, refreshToken, profile, done) {
+    function(accessToken, refreshToken, profile, done) {     
         
+
+        let temp;
+        /*
+           sometimes
+           facebook user not have there email registered with facebook
+           so we may not get the email in response so to overcome undefined error
+           we are checkin these coditions
+        */
+        if(profile.emails){
+            temp = profile.emails[0].value;
+        }
+        else{
+            temp = null;
+        }
+
         // this is the form of data we will save in DB
         let dataToSave = {
             fullName: profile.displayName,
             facebookAccessToken: accessToken,
             facebookUserId: profile.id,
-            /*
-               appending null with || condition here becuase sometimes 
-               facebook user not have there email registered with facebook
-               so we may not get the email in response so to overcome undefined error
-               we are appending null
-            */
-            email: profile.emails[0].value || null,
+            email: temp,
             facebookLogin: true
         }
 
