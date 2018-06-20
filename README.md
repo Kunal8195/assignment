@@ -16,7 +16,8 @@ This project have endpoints provided below. login and signup works good. when yo
 Root URL 
 Try this endpoint in your browser
 ``` 
- on server  http://159.65.157.18:3000/
+ on server  http://159.65.157.18:3000/ 
+ server is running with nohup
 
  on local  http://localhost:3000/
  ```
