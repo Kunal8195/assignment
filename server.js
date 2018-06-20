@@ -23,7 +23,7 @@ app.use(function(err, req, res, next) {
 
 // port and IP for server
 const port = process.env.PORT || 3000;
-const ip = process.env.IP || "159.65.157.18";
+const ip = process.env.IP || "localhost";
 
 // server starts listening
 app.listen(port, ip, function(error) {

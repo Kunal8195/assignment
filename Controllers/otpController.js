@@ -154,7 +154,7 @@ const verifySmsOTP = function(payload) {
   /* 
       payload: {
         phoneNo:9041306219,
-        otp:123456
+        otp:******
       }
   */
   return new Promise((resolve, reject) => {

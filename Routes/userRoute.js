@@ -1,5 +1,7 @@
-/** External Dependencies **/
+/* 3rd Party */
 const validate = require("express-validation");
+
+/** External Dependencies **/
 const validations = require("./validations");
 const Controller = require("../Controllers");
 
@@ -10,7 +12,7 @@ module.exports = function(app){
 		/* Expecting email and password in req.body
            {
            	  email:'xyz@gmail.com',
-           	  password: '123456789'
+           	  password: '********'
            }
         */		
 		Controller.logInController.logIn(req.body, function(err, result){

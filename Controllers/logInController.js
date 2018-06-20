@@ -7,6 +7,8 @@ const OTPController = require('./otpController');
 /** 3rd Party **/
 const async = require('async');
 const MD5 = require('md5');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 
 const logIn = function(payload, callback) {
@@ -23,6 +25,7 @@ const logIn = function(payload, callback) {
     // flag variables for knowing the status of the process
     let successLogin;
     let doubleAuthFlag = false;
+    let diffDeviceFlag = false;
 
     // store the user record if found in DB
     let found;
@@ -46,7 +49,8 @@ const logIn = function(payload, callback) {
                     password: 1,
                     email: 1,
                     phoneNo: 1,
-                    doubleAuth: 1
+                    doubleAuth: 1,
+                    accessToken: 1
                 };
 
                 // finding the record in mongoDB
@@ -58,9 +62,36 @@ const logIn = function(payload, callback) {
                         // will get executed if any record is found
                         if (result.length > 0) {
 
-                            // accessing the 0th index as an array returned by mongo
                             found = result[0];
-                            cb();
+                            // accessing the 0th index as an array returned by mongo
+                            /* 
+                               if accessToken is found then we will verify it 
+                               if not found then we will store a new one
+                            */
+                            let token = jwt.sign({_id:found._id},process.env.jwtSecretKey,{expiresIn:'1h'})
+                            
+                            if(found.accessToken){ 
+                                jwt.verify(found.accessToken, process.env.jwtSecretKey || 'qwertyuiop12345678', function(err, decoded){
+                                    if(err){
+
+                                        // if err occurs means
+                                        // we need a new token in DB
+                                        found.accessToken = token;
+                                        
+                                    } else {
+
+                                        /*
+                                          if token from DB is valid
+                                          then that means a token user has already logged in sometime before
+                                          from some other device                                          
+                                        */
+                                        diffDeviceFlag = true;                                        
+                                    }
+                                })
+                            } else {
+                                found.accessToken = token;                                
+                            }
+                            cb();                         
                         } else {
 
                             /*
@@ -86,6 +117,20 @@ const logIn = function(payload, callback) {
                 //will get true only if password is matched
                 if (payload.password == found.password) {
 
+                    let query = {
+                        _id: found._id
+                    };
+
+                    // update the access token in DB
+                    Service.mongoService.update(query, found, function(err, result){
+                        if(err){
+                            callback(err)
+                        } else {
+                            // success 
+                            // do nothing
+                        }
+                    })
+
                     /*
                       checking if user has not enabled doubleAuth
                       1. if enable then OTP will get sent to the registered mobile number or email
@@ -98,11 +143,10 @@ const logIn = function(payload, callback) {
                            checking if user has mobile number
                            if yes then OTP will be sent to the mobile number
                         */
+                        doubleAuthFlag = true;
+                        successLogin = true;
                         if (found.phoneNo) {
 
-                            doubleAuthFlag = true;
-                            successLogin = true;
-                            
                             OTPController.sendSmsOTP(found)
                                 .then(data => {
                                     dataToSend = {
@@ -144,7 +188,14 @@ const logIn = function(payload, callback) {
         function(err, result) {
             if (successLogin) {
                 if (doubleAuthFlag) {
-                    callback(null, dataToSend);
+                    if(diffDeviceFlag){
+                        dataToSend = {
+                            message: 'You are already Logged in from some other device, now your previous session will get expired, Logged in successfully!'
+                        }
+                        callback(null, dataToSend)
+                    } else {
+                        callback(null, dataToSend);
+                    }
                 } else {
                     dataToSend = {
                         message: 'You have logged in successfully'

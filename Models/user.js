@@ -11,6 +11,7 @@ const user = new Schema({
     password: {type: String, min:8},    
     dob : {type: String, default: null},
     doubleAuth: {type: Boolean, default: false},
+    accessToken: {type: String, default: null},
 
     // This is what we get from FB SignUp
     facebookAccessToken: {type: String, default: null, trim: true, index: true},
