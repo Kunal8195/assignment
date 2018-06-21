@@ -71,13 +71,14 @@ const logIn = function(payload, callback) {
                             let token = jwt.sign({_id:found._id},process.env.jwtSecretKey || 'qwertyuiop12345678',{expiresIn:'1h'})
                             
                             if(found.accessToken){ 
+                                
                                 jwt.verify(found.accessToken, process.env.jwtSecretKey || 'qwertyuiop12345678', function(err, decoded){
                                     if(err){
 
                                         // if err occurs means
                                         // we need a new token in DB
                                         found.accessToken = token;
-                                        
+                                        cb();
                                     } else {
 
                                         /*
@@ -85,13 +86,16 @@ const logIn = function(payload, callback) {
                                           then that means a token user has already logged in sometime before
                                           from some other device                                          
                                         */
-                                        diffDeviceFlag = true;                                        
+                                        
+                                        diffDeviceFlag = true;
+                                        cb();
                                     }
                                 })
                             } else {
                                 found.accessToken = token;                                
+                                cb();
                             }
-                            cb();                         
+                                                 
                         } else {
 
                             /*
@@ -152,7 +156,7 @@ const logIn = function(payload, callback) {
                                     dataToSend = {
                                         message: 'You have recieved OTP on your registered phoneNo'
                                     }
-                                    cb();
+                                    callback(null, dataToSend);
                                 })
                                 .catch(err => {
                                     callback(err)
@@ -168,7 +172,7 @@ const logIn = function(payload, callback) {
                                     dataToSend = {
                                         message: 'You have recieved OTP on your registered mail'
                                     }
-                                    cb();
+                                    callback(null, dataToSend);
                                 })
                                 .catch(err => {
                                     callback(err)
@@ -177,6 +181,7 @@ const logIn = function(payload, callback) {
 
                     } else {
                         successLogin = true;
+                        doubleAuthFlag = true;
                         cb();
                     }
                 } else {
@@ -187,13 +192,16 @@ const logIn = function(payload, callback) {
         ],
         function(err, result) {
             if (successLogin) {
-                if (doubleAuthFlag) {
+                if(doubleAuthFlag){
                     if(diffDeviceFlag){
                         dataToSend = {
                             message: 'You are already Logged in from some other device, now your previous session will get expired, Logged in successfully!'
                         }
                         callback(null, dataToSend)
                     } else {
+                        dataToSend = {
+                            message: 'You have logged in successfully'
+                        };
                         callback(null, dataToSend);
                     }
                 } else {
