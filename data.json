@@ -1,0 +1,119 @@
+
+
+{
+    "data": {
+        "formCode": "FRM0001001",
+        "rowHeight": "50",
+        "scrollbarH": true,
+        "headerHeight": "50",
+        "limit": "5",
+        "offset": "0",
+        "footerHeight": "50",
+        "pager": true,
+        "limitShow": true,
+        "limits": [
+            "10",
+            "15",
+            "20",
+            "25"
+        ],
+        "selectionType": "checkbox",
+        "selectAllRowsOnPage": false,
+        "checkboxable": true,
+        "headerCheckboxable": true,
+        "filterable": true,
+        "editableIcon": true,
+        "title": "Users",
+        "subTitle": "Showing all users",
+        "emptyMessage": "No Data to Show",
+        "buttons": [
+            {
+                "icon": "md-get_app",
+                "clickEvent": "download",
+                "handlerOwner": "resource",
+                "customCssClass": "gray_clr mr_10 pointer"
+            }
+        ],
+        "columns": [
+            {
+                "prop": "MODULE",
+                "name": "Module Code",
+                "sortable": true,
+                "resizeable": true,
+                "width": "300",
+                "frozenLeft": true
+            },
+            {
+                "prop": "RESOURCE",
+                "name": "Resource",
+                "sortable": true,
+                "resizeable": true,
+                "width": "400",
+                "align": "left"
+            },
+            {
+                "prop": "RESOURCE_CODE",
+                "name": "Resource Code",
+                "sortable": true,
+                "resizeable": true,
+                "width": "400",
+                "align": "left"
+            },
+            {
+                "prop": "ACTIVE",
+                "name": "Active",
+                "sortable": true,
+                "resizeable": true,
+                "width": "400",
+                "align": "left"
+            }
+        ],
+        "actionButtons": [
+            {
+                "icon": "md-email",
+                "clickEvent": "sendMail",
+                "handlerOwner": "resource",
+                "customCssClass": "gray_clr mr_10 pointer"
+            },
+            {
+                "icon": "md-person_add",
+                "clickEvent": "addPerson",
+                "handlerOwner": "resource",
+                "customCssClass": "gray_clr mr_10 pointer"
+            }
+        ],
+        "rowActions": [
+            {
+                "icon": "md-create",
+                "clickEvent": "navigateToFormBuilder",
+                "handlerOwner": "resource",
+                "customCssClass": "gray_clr pointer",
+                "name": "Edit",
+                "prop": "EDIT"
+            },
+            {
+                "icon": "md-visibility",
+                "clickEvent": "navigateToFormGenerator",
+                "handlerOwner": "resource",
+                "customCssClass": "gray_clr pointer",
+                "name": "View",
+                "prop": "VIEW"
+            }
+        ],
+        "applicableFilters": [
+            {
+                "type": "TXT",
+                "code": "FLD0001001",
+                "flexiLabel": "FORM_CODE",
+                "label": "Form Code"
+            },
+            {
+                "type": "TXT",
+                "code": "FLD0001002",
+                "flexiLabel": "LABEL",
+                "label": "Label"
+            }
+        ]
+    }
+}
+
