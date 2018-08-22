@@ -2,7 +2,7 @@
 
 {
     "data": {
-        "formCode": "FRM0001001",
+        "resourceCode": "234",
         "rowHeight": "50",
         "scrollbarH": true,
         "headerHeight": "50",
@@ -104,14 +104,14 @@
             {
                 "type": "TXT",
                 "code": "FLD0001001",
-                "flexiLabel": "FORM_CODE",
-                "label": "Form Code"
+                "flexiLabel": "RESOURCE_CODE",
+                "label": "Resource Code"
             },
             {
                 "type": "TXT",
                 "code": "FLD0001002",
-                "flexiLabel": "LABEL",
-                "label": "Label"
+                "flexiLabel": "MODULE_NAME",
+                "label": "Module Name"
             }
         ]
     }
