@@ -37,7 +37,7 @@
         "columns": [
             {
                 "prop": "MODULE",
-                "name": "Module Code",
+                "name": "Module Name",
                 "sortable": true,
                 "resizeable": true,
                 "width": "300",
