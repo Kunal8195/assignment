@@ -85,21 +85,13 @@
         "rowActions": [
             {
                 "icon": "md-create",
-                "clickEvent": "navigateToFormBuilder",
+                "clickEvent": "navigateToResourceBuilder",
                 "handlerOwner": "resource",
                 "customCssClass": "gray_clr pointer",
                 "name": "Edit",
                 "prop": "EDIT"
             },
-            {
-                "icon": "md-visibility",
-                "clickEvent": "navigateToFormGenerator",
-                "handlerOwner": "resource",
-                "customCssClass": "gray_clr pointer",
-                "name": "View",
-                "prop": "VIEW"
-            }
-        ],
+       ],
         "applicableFilters": [
             {
                 "type": "TXT",
