@@ -90,7 +90,7 @@
                 "customCssClass": "gray_clr pointer",
                 "name": "Edit",
                 "prop": "EDIT"
-            },
+            }
        ],
         "applicableFilters": [
             {
