@@ -90,6 +90,14 @@
                 "customCssClass": "gray_clr pointer",
                 "name": "Edit",
                 "prop": "EDIT"
+            },
+            {
+                "icon": "md-create",
+                "clickEvent": "navigateToResourceGenerator",
+                "handlerOwner": "resource",
+                "customCssClass": "gray_clr pointer",
+                "name": "View",
+                "prop": "VIEW"
             }
        ],
         "applicableFilters": [
