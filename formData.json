@@ -26,4 +26,3 @@
 		"applicableFilters": [{"type": "TXT", "code": "FLD0001001", "flexiLabel": "FORM_CODE", "label": "Form Code"},{"type": "TXT", "code": "FLD0001002", "flexiLabel": "LABEL", "label": "Label"}]
 	}
 }
-}
